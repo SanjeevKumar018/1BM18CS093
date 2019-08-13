@@ -1,0 +1,62 @@
+#include<stdio.h>
+#include<conio.h>
+#define max_size 5
+int item[max_size];
+int top=-1;
+void push()
+{
+  if(top<max_size-1)
+  {
+  printf("\n enter the item to be pushed");
+  scanf("%d",&item[++top]);
+  }
+  else
+  printf("\nstack is full");
+}
+
+void pop()
+{
+  if(top==-1)
+  printf("\nstack is empty");
+  else
+    {printf("\nremoved item is %d",item[top]);
+    top--;
+    }
+}
+void print()
+{int i;
+if(top==-1)
+printf("\nno element to be printed");
+else
+{
+printf("\nthe stack is");
+for(i=0;i<=top;i++)
+ {printf("\n%d",item[i]);
+ }
+}
+}
+void main()
+{
+char ch='y';
+int x;
+clrscr();
+while(ch=='y'||ch=='Y')
+{printf("\nchoose an operation to be done");
+printf("\n 1.push an object \n 2.pop an object \n 3.print an object");
+scanf("%d",&x);
+switch(x)
+{
+case 1: push();
+	break;
+case 2: pop();
+	break;
+case 3: print();
+       break;
+default: printf("\nenter an appropriate number");
+}
+printf("\nperform an operation(y/n):");
+fflush (stdin);
+scanf("%c",&ch);
+}
+getch();
+}
