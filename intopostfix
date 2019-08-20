@@ -1,0 +1,99 @@
+#include<stdio.h>
+#define s_size 10
+#define exp_size 15
+int top=-1;
+char s[s_size];
+void push(char x)
+{
+s[++top]=x;
+}
+void pop()
+{
+top--;
+}
+int topp()
+{
+return s[top];
+}
+int empty()
+{
+if(top==-1)
+return 1;
+else return 0;
+}
+int strl(char s1[])
+{
+int i=0,l=0;
+while(s1[i]!='\0')
+{
+i++;
+l++;
+}
+return l;
+}
+void main()
+{
+int i,n=0;
+char res[exp_size]={0},exp[exp_size];
+printf("\n enter an expression");
+scanf("%s",exp);
+for(i=0;i<strl(exp);i++)
+{
+	if(exp[i]=='+'||exp[i]=='-')
+	{
+		if (empty())
+		{
+			push(exp[i]);
+		}
+		else if(topp()=='+'||topp()=='-')
+		{	res[n++]=topp();
+			pop();
+			push(exp[i]);
+		}
+		else
+		{
+			while(!empty())
+			{
+				res[n++]=topp();
+				pop();
+			}
+			push(exp[i]);
+		}
+	}
+	else if(exp[i]=='*'||exp[i]=='/')
+	{
+		if(empty())
+			push(exp[i]);
+		else if(topp()=='*'||topp()=='/')
+		{
+			res[n++]=topp();
+			pop();
+			push(exp[i]);
+		}
+		else
+			push(exp[i]);
+	}
+		else if(exp[i]=='(')
+			push(exp[i]);
+	else if(exp[i]==')')
+	{
+		while(!empty()&&topp()!='(')
+		{	res[n++]=topp();
+			pop();
+		}
+		pop();
+	}
+	else
+		res[n++]=exp[i];
+	}	
+	while(!empty()&&topp()!='(')
+	{
+		res[n++]=topp();
+		pop();
+	}
+printf("\n infix expression= %s",exp);
+printf("\n postfix expression= %s",res);
+}
+
+
+
